@@ -1,0 +1,26 @@
+---
+import Brand from './Brand.astro';
+import { company } from '~/data/lca/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-main">
+    <div><Brand inverse /><p>Tecnología con criterio.<br />Seguridad en cada decisión.</p></div>
+    <div class="footer-links">
+      <span>Hablemos de tu empresa</span><a href={`mailto:${company.email}`}>{company.email}</a><a
+        href={company.linkedin}
+        rel="noopener noreferrer"
+        target="_blank"
+        >LCA en LinkedIn <Icon name="tabler:arrow-up-right" /><span class="sr-only"> (abre otra pestaña)</span></a
+      >
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© {new Date().getFullYear()} {company.name}</span>
+    <nav aria-label="Información legal">
+      <a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><a href="/cookies">Cookies</a>
+    </nav>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>

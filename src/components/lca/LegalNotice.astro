@@ -1,0 +1,15 @@
+---
+import { legal } from '~/data/lca/site';
+const complete = Boolean(legal.registeredName && legal.taxId && legal.address && legal.registry);
+---
+
+{
+  !complete && (
+    <aside class="draft-note">
+      <p>
+        <strong>Borrador pendiente de completar.</strong> Los datos identificativos deben confirmarse antes de publicar
+        esta página.
+      </p>
+    </aside>
+  )
+}

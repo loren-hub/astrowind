@@ -1,0 +1,39 @@
+---
+import Layout from '~/layouts/LcaLayout.astro';
+import { legal } from '~/data/lca/site';
+---
+
+<Layout
+  metadata={{
+    title: 'Cookies y tecnologías similares',
+    description: 'Información sobre las tecnologías de seguridad y privacidad de esta web.',
+    robots: { index: false },
+  }}
+  ><article class="legal-page">
+    <p class="eyebrow">NAVEGACIÓN Y PRIVACIDAD</p><h1>Cookies y tecnologías similares</h1><p>
+      Actualizada: {legal.revised}
+    </p><h2>Configuración de esta web</h2><p>
+      Esta versión no integra publicidad, píxeles de redes sociales, vídeos incrustados ni analítica de terceros. Los
+      enlaces a LinkedIn llevan a un sitio externo; no cargan su contenido dentro de esta web.
+    </p><h2>Protección del formulario</h2><p>
+      Cuando el formulario está habilitado y empiezas a utilizarlo, se carga Cloudflare Turnstile para verificar la
+      solicitud. El servicio puede tratar señales técnicas del navegador y utilizar tecnologías necesarias para la
+      seguridad. La configuración de esta web no habilita la función de pre-clearance de Turnstile.
+    </p><p>
+      Cloudflare puede aplicar otras medidas de seguridad desde la configuración del dominio. Si requieren cookies
+      técnicas, su uso y duración dependen de esas medidas. Más información en el <a
+        href="https://www.cloudflare.com/turnstile-privacy-policy/"
+        target="_blank"
+        rel="noopener noreferrer">aviso de privacidad de Turnstile</a
+      >.
+    </p><h2>Opciones</h2><p>
+      Puedes gestionar las cookies desde tu navegador. Bloquear tecnologías de seguridad puede impedir el uso del
+      formulario; el contacto por email sigue disponible. Consulta el tratamiento de datos en la <a href="/privacidad"
+        >política de privacidad</a
+      >.
+    </p><h2>Modificaciones</h2><p>
+      Si se incorporan analítica, publicidad u otras tecnologías no necesarias, esta información y los mecanismos de
+      consentimiento se adaptarán antes de activarlas.
+    </p><a class="lca-btn" href="/">Volver al inicio</a>
+  </article></Layout
+>

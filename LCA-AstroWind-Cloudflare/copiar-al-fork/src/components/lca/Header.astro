@@ -1,0 +1,39 @@
+---
+import Brand from './Brand.astro';
+import { navigation } from '~/data/lca/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <Brand />
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <a class="lca-btn lca-btn--small header-cta" href="/#contacto">Hablemos <Icon name="tabler:arrow-up-right" /></a>
+    <details class="mobile-menu">
+      <summary aria-label="Abrir o cerrar el menú"><Icon name="tabler:menu-2" /><span>Menú</span></summary>
+      <nav aria-label="Navegación móvil">
+        {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/#contacto">Hablemos <span aria-hidden="true">↗</span></a>
+      </nav>
+    </details>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  menu?.querySelectorAll('a').forEach((link) =>
+    link.addEventListener('click', () => {
+      menu.open = false;
+    })
+  );
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+  });
+</script>

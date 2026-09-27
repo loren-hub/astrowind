@@ -1,0 +1,281 @@
+---
+import { company, contactEnabled } from '~/data/lca/site';
+import { serviceNames } from '~/data/lca/services';
+import { Icon } from 'astro-icon/components';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const hasForm = contactEnabled && Boolean(siteKey);
+---
+
+<section id="contacto" class="section contact-section" aria-labelledby="contact-title">
+  <div class="wrap contact-layout">
+    <div class="contact-copy">
+      <p class="eyebrow">EL SIGUIENTE PASO</p><h2 id="contact-title">
+        Cuéntanos<br />qué necesitas<br /><em>resolver.</em>
+      </h2><p>
+        Una primera conversación para conocer tu situación, identificar prioridades y ver cómo podemos ayudarte.
+      </p><a class="contact-email" href={`mailto:${company.email}`}
+        >{company.email}<Icon name="tabler:arrow-up-right" /></a
+      ><p class="contact-location">{company.location}</p><div class="contact-expect">
+        <Icon name="tabler:message-circle" /><p>
+          Revisaremos tu consulta y te contactaremos por email. Sin suscripciones comerciales automáticas.
+        </p>
+      </div>
+    </div><div class="contact-card">
+      {
+        hasForm ? (
+          <form id="lca-contact" method="post" action="/api/contact" data-sitekey={siteKey}>
+            <>
+              <h3>Empecemos por tu situación</h3>
+              <p class="form-intro">Los campos marcados con * son obligatorios.</p>
+            </>
+            <div class="form-row">
+              <>
+                <div class="field">
+                  <>
+                    <label for="name">Nombre *</label>
+                    <input
+                      id="name"
+                      name="name"
+                      autocomplete="name"
+                      required
+                      minlength="2"
+                      maxlength="80"
+                      placeholder="Tu nombre"
+                    />
+                  </>
+                </div>
+                <div class="field">
+                  <>
+                    <label for="company">Empresa</label>
+                    <input
+                      id="company"
+                      name="company"
+                      autocomplete="organization"
+                      maxlength="120"
+                      placeholder="Nombre de tu empresa"
+                    />
+                  </>
+                </div>
+              </>
+            </div>
+            <div class="field">
+              <>
+                <label for="email">Email de contacto *</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  required
+                  maxlength="254"
+                  placeholder="nombre@empresa.es"
+                />
+              </>
+            </div>
+            <div class="field">
+              <>
+                <label for="service">¿En qué podemos ayudarte? *</label>
+                <select id="service" name="service" required>
+                  <option value="">Selecciona un área</option>
+                  {Object.entries(serviceNames).map(([value, label]) => (
+                    <option value={value}>{label}</option>
+                  ))}
+                </select>
+              </>
+            </div>
+            <div class="field">
+              <>
+                <label for="message">Tu situación *</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  minlength="20"
+                  maxlength="3000"
+                  placeholder="Qué necesitas mejorar, qué herramientas utilizas y qué te gustaría conseguir."
+                  aria-describedby="message-hint"
+                />
+                <small id="message-hint">No incluyas contraseñas ni información confidencial.</small>
+              </>
+            </div>
+            <div class="honeypot" aria-hidden="true">
+              <>
+                <label for="website">No rellenar este campo</label>
+                <input id="website" name="website" tabindex="-1" autocomplete="off" />
+              </>
+            </div>
+            <label class="privacy-check">
+              <>
+                <input name="privacy" type="checkbox" value="accepted" required />
+                <span>
+                  He leído la{' '}
+                  <a href="/privacidad" target="_blank" rel="noopener noreferrer">
+                    política de privacidad<span class="sr-only"> (abre otra pestaña)</span>
+                  </a>
+                  . *
+                </span>
+              </>
+            </label>
+            <p class="form-privacy">
+              LCA tratará tus datos para atender la consulta. Puedes ejercer tus derechos en {company.email}. Más
+              información en la política de privacidad.
+            </p>
+            <div id="turnstile-mount" class="turnstile-mount" />
+            <button class="lca-btn form-submit" type="submit" disabled>
+              <>
+                <span>Enviar consulta</span>
+                <Icon name="tabler:arrow-up-right" />
+              </>
+            </button>
+            <p id="form-status" class="form-status" role="status" aria-live="polite" aria-atomic="true">
+              La verificación de seguridad se activará al rellenar el formulario.
+            </p>
+            <noscript>
+              <p>
+                Para usar el formulario necesitas JavaScript. También puedes escribir a{' '}
+                <a href={`mailto:${company.email}`}>{company.email}</a>.
+              </p>
+            </noscript>
+          </form>
+        ) : (
+          <div class="email-contact">
+            <>
+              <Icon name="tabler:messages" />
+              <h3>Hablemos de tu proyecto.</h3>
+              <p>
+                Escríbenos con una breve descripción de lo que necesitas. Si ya tienes herramientas o un proveedor IT,
+                cuéntanos también cómo trabajas hoy.
+              </p>
+              <a class="lca-btn" href={`mailto:${company.email}?subject=Consulta%20desde%20la%20web%20LCA`}>
+                Escribir a LCA <Icon name="tabler:arrow-up-right" />
+              </a>
+              <p class="form-privacy">
+                Consulta cómo tratamos tus datos en nuestra <a href="/privacidad">política de privacidad</a>.
+              </p>
+            </>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+<script>
+  type Turnstile = {
+    render: (element: HTMLElement, options: Record<string, unknown>) => string;
+    reset: (id: string) => void;
+    getResponse: (id: string) => string;
+  };
+  const turnstileWindow = window as Window & { turnstile?: Turnstile };
+  const form = document.querySelector<HTMLFormElement>('#lca-contact');
+  document.querySelectorAll<HTMLAnchorElement>('[data-service]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const select = form?.querySelector<HTMLSelectElement>('#service');
+      if (select) select.value = link.dataset.service || '';
+    });
+  });
+  if (form) {
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const status = form.querySelector<HTMLElement>('#form-status')!;
+    const mount = form.querySelector<HTMLElement>('#turnstile-mount')!;
+    let widgetId: string | undefined;
+    let loading = false;
+    let busy = false;
+    let preserveStatus = false;
+    const say = (message: string, error = false) => {
+      status.textContent = message;
+      status.dataset.error = String(error);
+    };
+    const loadProtection = () => {
+      if (loading) return;
+      loading = true;
+      say('Preparando la verificación de seguridad…');
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.onload = () => {
+        if (!turnstileWindow.turnstile) return;
+        widgetId = turnstileWindow.turnstile.render(mount, {
+          sitekey: form.dataset.sitekey,
+          action: 'contact',
+          theme: 'light',
+          language: 'es',
+          size: window.matchMedia('(max-width: 420px)').matches ? 'compact' : 'flexible',
+          callback: () => {
+            submit.disabled = busy;
+            if (!preserveStatus) say('Verificación completada. Puedes enviar tu consulta.');
+          },
+          'expired-callback': () => {
+            submit.disabled = true;
+            if (!preserveStatus) say('La verificación ha caducado. La estamos renovando.');
+            if (widgetId) turnstileWindow.turnstile?.reset(widgetId);
+          },
+          'error-callback': () => {
+            submit.disabled = true;
+            say('No se ha podido verificar la conexión. Recarga la página o escríbenos por email.', true);
+          },
+        });
+      };
+      script.onerror = () => {
+        script.remove();
+        loading = false;
+        say(
+          'No se ha cargado la verificación. Puedes volver a intentarlo al entrar en un campo o escribirnos por email.',
+          true
+        );
+      };
+      document.head.append(script);
+    };
+    form.addEventListener('focusin', loadProtection);
+    form.addEventListener('input', () => {
+      preserveStatus = false;
+    });
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (busy || !form.reportValidity()) return;
+      const token = widgetId ? turnstileWindow.turnstile?.getResponse(widgetId) : '';
+      if (!token) {
+        say('Completa la verificación de seguridad antes de enviar.', true);
+        return;
+      }
+      busy = true;
+      preserveStatus = true;
+      submit.disabled = true;
+      form.setAttribute('aria-busy', 'true');
+      say('Enviando tu consulta…');
+      const body = new URLSearchParams();
+      new FormData(form).forEach((value, key) => {
+        if (typeof value === 'string') body.append(key, value);
+      });
+      body.set('cf-turnstile-response', token);
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body,
+          headers: { Accept: 'application/json' },
+          signal: AbortSignal.timeout(25000),
+        });
+        const result = (await response.json()) as { ok?: boolean; message?: string };
+        if (!response.ok || !result.ok)
+          throw new Error(result.message || 'No se ha podido enviar. Prueba de nuevo o escríbenos por email.');
+        form.reset();
+        preserveStatus = true;
+        say('Consulta enviada. Revisaremos tu mensaje y te contactaremos por email.');
+        status.setAttribute('tabindex', '-1');
+        status.focus();
+      } catch (error) {
+        say(
+          error instanceof Error && error.name !== 'TimeoutError' && error.name !== 'TypeError'
+            ? error.message
+            : 'No hemos podido confirmar el envío. Si no recibes respuesta, escríbenos por email.',
+          true
+        );
+      } finally {
+        busy = false;
+        form.removeAttribute('aria-busy');
+        if (widgetId) turnstileWindow.turnstile?.reset(widgetId);
+      }
+    });
+  }
+</script>

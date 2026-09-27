@@ -1,0 +1,61 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Entender',
+    text: 'Revisamos tu entorno, los procesos críticos y lo que necesitas mejorar.',
+    output: 'Mapa de situación',
+  },
+  {
+    number: '02',
+    title: 'Priorizar',
+    text: 'Ordenamos riesgos y oportunidades por impacto, esfuerzo y coste.',
+    output: 'Hoja de ruta acordada',
+  },
+  {
+    number: '03',
+    title: 'Implementar',
+    text: 'Aplicamos cambios por fases, con pruebas, documentación y transferencia.',
+    output: 'Soluciones en funcionamiento',
+  },
+  {
+    number: '04',
+    title: 'Acompañar',
+    text: 'Revisamos resultados y ajustamos el servicio a la evolución de tu empresa.',
+    output: 'Seguimiento y mejora',
+  },
+];
+---
+
+<section id="proceso" class="section" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">04 / UNA FORMA CLARA DE TRABAJAR</p><h2 id="process-title">
+          Sabes qué hacemos.<br />Y para qué lo hacemos.
+        </h2>
+      </div><p>
+        Un interlocutor, prioridades compartidas y documentación útil. Para que las decisiones no dependan de una caja
+        negra.
+      </p>
+    </div><ol class="process-grid">
+      {
+        steps.map((step) => (
+          <li>
+            <>
+              <span class="step-number">{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+              <span class="step-output">{step.output}</span>
+            </>
+          </li>
+        ))
+      }
+    </ol><div id="nosotros" class="about-strip">
+      <h3>Un equipo cercano.<br />Una mirada completa.</h3><p>
+        En LCA conectamos consultoría informática y ciberseguridad para ayudar a empresas en España. Colaboramos con tu
+        equipo o te acompañamos como apoyo IT externo, con lenguaje claro y soluciones que puedas mantener.
+      </p><span>Madrid<br />Albacete<br /><strong>Toda España ↗</strong></span>
+    </div>
+  </div>
+</section>

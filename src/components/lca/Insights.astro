@@ -1,0 +1,44 @@
+---
+import { insights, company } from '~/data/lca/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="perspectivas" class="section insights-section" aria-labelledby="insights-title">
+  <div class="wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">05 / PERSPECTIVAS LCA</p><h2 id="insights-title">
+          Entender el cambio.<br />Decidir con criterio.
+        </h2>
+      </div><div>
+        <p>
+          Compartimos análisis sobre IA, seguridad e infraestructura y su impacto en el día a día de las empresas.
+        </p><a class="text-link dark-link" href={company.linkedin} target="_blank" rel="noopener noreferrer"
+          >Seguir a LCA en LinkedIn <Icon name="tabler:arrow-up-right" /><span class="sr-only">
+            (abre otra pestaña)</span
+          ></a
+        >
+      </div>
+    </div><div class="insights-grid">
+      {
+        insights.map((item) => (
+          <article>
+            <>
+              <p class="eyebrow">{item.tag}</p>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Ver en LinkedIn: ${item.title} (abre otra pestaña)`}
+              >
+                Ver en LinkedIn <Icon name="tabler:arrow-up-right" />
+              </a>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

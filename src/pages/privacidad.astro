@@ -1,0 +1,62 @@
+---
+import Layout from '~/layouts/LcaLayout.astro';
+import LegalNotice from '~/components/lca/LegalNotice.astro';
+import { legal } from '~/data/lca/site';
+---
+
+<Layout
+  metadata={{
+    title: 'Política de privacidad',
+    description: 'Información sobre el tratamiento de datos de contacto en LCA Technology Solutions.',
+    robots: { index: false },
+  }}
+  ><article class="legal-page">
+    <p class="eyebrow">TUS DATOS</p><h1>Política de privacidad</h1><p>Actualizada: {legal.revised}</p><LegalNotice /><h2
+    >
+      Responsable
+    </h2><p>
+      {legal.registeredName || '[Completar denominación social]'}, NIF {legal.taxId || '[Completar NIF]'}, domicilio {
+        legal.address || '[Completar domicilio]'
+      }. Puedes contactar en <a href={`mailto:${legal.privacyEmail}`}>{legal.privacyEmail}</a>.
+    </p><h2>Datos y finalidad</h2><p>
+      Al contactar tratamos tu nombre, email, empresa si la indicas, área de interés y mensaje. Los utilizamos para
+      responder, comprender tu necesidad y preparar, cuando lo solicites, una propuesta. No incluyas contraseñas,
+      secretos, datos de terceros ni información especialmente sensible.
+    </p><p>
+      La infraestructura de alojamiento y la protección antispam pueden tratar datos técnicos, como dirección IP,
+      información del navegador y señales de seguridad, para prevenir abusos y proteger el servicio.
+    </p><h2>Base jurídica</h2><p>
+      La gestión de solicitudes de servicios se apoya en las medidas precontractuales solicitadas por la persona
+      interesada, cuando corresponda (artículo 6.1.b del RGPD). Las consultas generales y los datos de contacto
+      profesional se tratan, cuando proceda, sobre la base del interés legítimo en atenderlas, con las garantías legales
+      aplicables (artículo 6.1.f). La seguridad del servicio responde al interés legítimo en prevenir abusos.
+    </p><p>
+      El formulario no te suscribe a publicidad. La casilla de lectura de la política acredita que la información se ha
+      puesto a tu disposición; no autoriza usos comerciales adicionales.
+    </p><h2>Conservación</h2><p>
+      Conservaremos la consulta durante el tiempo necesario para atenderla y realizar el seguimiento solicitado. Si se
+      inicia una relación contractual, aplicaremos los plazos asociados al servicio y a las obligaciones legales. Los
+      datos que deban conservarse para atender responsabilidades permanecerán bloqueados cuando corresponda.
+    </p><h2>Proveedores y transferencias</h2><p>
+      Utilizamos Cloudflare para alojamiento, protección del formulario y transporte del mensaje, además del proveedor
+      del buzón corporativo para recibirlo y gestionarlo. Estos proveedores pueden tratar datos en distintas
+      ubicaciones. Deben aplicarse los contratos de encargo y, cuando sea necesario, las garantías de transferencia
+      internacional previstas en el RGPD.
+    </p><p>
+      La información sobre Cloudflare está disponible en su <a
+        href="https://www.cloudflare.com/privacypolicy/"
+        target="_blank"
+        rel="noopener noreferrer">política de privacidad</a
+      > y en su <a href="https://www.cloudflare.com/cloudflare-customer-dpa/" target="_blank" rel="noopener noreferrer"
+        >acuerdo de tratamiento de datos</a
+      >. No vendemos tus datos ni los compartimos para publicidad.
+    </p><h2>Tus derechos</h2><p>
+      Puedes solicitar acceso, rectificación, supresión, oposición, limitación y portabilidad, en los casos legalmente
+      previstos, escribiendo a <a href={`mailto:${legal.privacyEmail}`}>{legal.privacyEmail}</a>. También puedes
+      reclamar ante la <a href="https://www.aepd.es/">Agencia Española de Protección de Datos</a>.
+    </p><h2>Decisiones automatizadas y cambios</h2><p>
+      Este formulario no toma decisiones automatizadas con efectos jurídicos ni elabora perfiles comerciales.
+      Actualizaremos esta política cuando cambien los tratamientos descritos.
+    </p><a class="lca-btn" href="/#contacto">Volver al contacto</a>
+  </article></Layout
+>

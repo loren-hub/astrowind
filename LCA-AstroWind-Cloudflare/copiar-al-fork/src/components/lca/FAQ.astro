@@ -1,0 +1,28 @@
+---
+import { faqs } from '~/data/lca/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="preguntas" class="section" aria-labelledby="faq-title">
+  <div class="wrap faq-layout">
+    <div>
+      <p class="eyebrow">PREGUNTAS FRECUENTES</p><h2 id="faq-title">Antes de<br />dar el paso.</h2><p>
+        Si tu caso es distinto,<br /><a class="inline-link" href="#contacto">cuéntanoslo</a>.
+      </p>
+    </div><div class="faq-list">
+      {
+        faqs.map((item) => (
+          <details name="lca-faq">
+            <>
+              <summary>
+                {item.question}
+                <Icon name="tabler:plus" />
+              </summary>
+              <p>{item.answer}</p>
+            </>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

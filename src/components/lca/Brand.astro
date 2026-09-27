@@ -1,0 +1,11 @@
+---
+export interface Props {
+  inverse?: boolean;
+}
+const { inverse = false } = Astro.props;
+---
+
+<a href="/" class:list={['brand', { 'brand--inverse': inverse }]} aria-label="LCA Technology Solutions, inicio">
+  <span class="brand-mark">lca<span aria-hidden="true">.</span></span>
+  <span class="brand-name">TECHNOLOGY<br />SOLUTIONS</span>
+</a>

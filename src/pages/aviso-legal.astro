@@ -1,0 +1,42 @@
+---
+import Layout from '~/layouts/LcaLayout.astro';
+import LegalNotice from '~/components/lca/LegalNotice.astro';
+import { company, legal } from '~/data/lca/site';
+---
+
+<Layout
+  metadata={{
+    title: 'Aviso legal',
+    description: 'Datos del titular y condiciones de uso del sitio web de LCA Technology Solutions.',
+    robots: { index: false },
+  }}
+  ><article class="legal-page">
+    <p class="eyebrow">INFORMACIÓN LEGAL</p><h1>Aviso legal</h1><p>Actualizado: {legal.revised}</p><LegalNotice /><h2>
+      Titular del sitio web
+    </h2><dl>
+      <dt>Denominación social</dt><dd>{legal.registeredName || '[Completar denominación social]'}</dd><dt>NIF</dt><dd>
+        {legal.taxId || '[Completar NIF]'}
+      </dd><dt>Domicilio</dt><dd>{legal.address || '[Completar domicilio fiscal]'}</dd><dt>Datos registrales</dt><dd>
+        {legal.registry || '[Completar datos registrales]'}
+      </dd><dt>Contacto</dt><dd><a href={`mailto:${company.email}`}>{company.email}</a></dd>
+    </dl><h2>Finalidad y uso</h2><p>
+      Este sitio informa sobre los servicios de consultoría informática y ciberseguridad de {company.name}. Las
+      descripciones son informativas. El alcance, precio, cobertura y compromisos de cada servicio se concretan en su
+      propuesta y contrato.
+    </p><p>
+      El uso del sitio debe respetar la legislación aplicable y los derechos de terceros. No está autorizado interferir
+      en su funcionamiento ni acceder a datos o sistemas sin permiso.
+    </p><h2>Propiedad intelectual</h2><p>
+      Los contenidos y elementos de marca pertenecen a sus titulares. El código de la plantilla AstroWind conserva su
+      licencia MIT. Las marcas y herramientas de terceros mencionadas se identifican con fines informativos y no
+      implican una relación de patrocinio o certificación.
+    </p><h2>Disponibilidad y enlaces</h2><p>
+      Trabajamos para mantener la información actualizada y el sitio disponible. Los enlaces externos pueden cambiar y
+      sus contenidos dependen de sus respectivos titulares. Estas condiciones no limitan los derechos ni las
+      responsabilidades que establezca la normativa aplicable.
+    </p><h2>Normativa aplicable</h2><p>
+      Se aplica la legislación española y europea que corresponda. La competencia judicial se determinará conforme a las
+      normas aplicables y a los derechos imperativos de las personas usuarias.
+    </p><a class="lca-btn" href="/">Volver al inicio</a>
+  </article></Layout
+>

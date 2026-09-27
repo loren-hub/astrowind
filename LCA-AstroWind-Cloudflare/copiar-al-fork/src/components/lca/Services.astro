@@ -1,0 +1,53 @@
+---
+import { services } from '~/data/lca/services';
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="servicios" class="section" aria-labelledby="services-title">
+  <div class="wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / LO QUE PODEMOS HACER POR TI</p><h2 id="services-title">
+          La tecnología que necesitas.<br />El apoyo que te falta.
+        </h2>
+      </div><p>
+        Desde el día a día hasta el siguiente paso. Diseñamos un servicio alrededor de tu negocio y de lo que necesitas
+        resolver.
+      </p>
+    </div>
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <article class="service-card" id={`servicio-${service.id}`}>
+            <>
+              <div class="card-top">
+                <>
+                  <Icon name={service.icon} />
+                  <span>{service.number}</span>
+                </>
+              </div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <ul>
+                {service.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <div class="card-end">
+                <>
+                  <span>{service.result}</span>
+                  <a href={`#contacto`} data-service={service.id} aria-label={`Consultar sobre ${service.title}`}>
+                    <Icon name="tabler:arrow-up-right" />
+                  </a>
+                </>
+              </div>
+            </>
+          </article>
+        ))
+      }
+    </div>
+    <p class="section-footnote">
+      Cada propuesta define entregables, herramientas, responsabilidades y nivel de servicio.
+    </p>
+  </div>
+</section>

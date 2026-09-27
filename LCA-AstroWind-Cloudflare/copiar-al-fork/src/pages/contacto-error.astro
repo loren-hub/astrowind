@@ -1,0 +1,19 @@
+---
+import Layout from '~/layouts/LcaLayout.astro';
+import { company } from '~/data/lca/site';
+---
+
+<Layout
+  metadata={{
+    title: 'No hemos podido confirmar el envío',
+    description: 'Vuelve a intentarlo o contacta con LCA por email.',
+    robots: { index: false },
+  }}
+  ><section class="legal-page">
+    <p class="eyebrow">CONTACTO LCA</p><h1>No hemos podido confirmar el envío.</h1><p>
+      Puedes volver al formulario y comprobar los campos y la verificación de seguridad, o escribir a <a
+        href={`mailto:${company.email}`}>{company.email}</a
+      >.
+    </p><a class="lca-btn" href="/#contacto">Volver al formulario</a>
+  </section></Layout
+>
